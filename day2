@@ -1,0 +1,7 @@
+SELECT e.name, e.emp_id, e.age, e.salary, d.name AS department
+FROM Employee e
+JOIN Department d
+  ON e.department_id = d.department_id
+WHERE d.name = 'IT';
+
+SELECT name FROM depatment
