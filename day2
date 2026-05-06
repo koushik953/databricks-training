@@ -1,0 +1,91 @@
+-- your code goes here
+CREATE table Department(
+department_id int,
+name varchar(20)
+  );
+  
+  INSERT INTO Department(department_id,name)VALUES
+ (1,'IT'),
+ (2,'HR'),
+ (3,'Finance'),
+ (4,'Marketing');
+ SELECT name FROM Department;
+ 
+ CREATE TABLE Employee (
+    emp_id INT PRIMARY KEY,
+    name VARCHAR(100),
+    age INT,
+    salary DECIMAL(10, 2),
+    department_id INT,
+    hire_date DATE
+   );
+ 
+ INSERT INTO Employee (emp_id, name, age, salary, department_id, hire_date) VALUES
+(1, 'John Doe', 28, 50000.00, 1, '2020-01-15'),
+(2, 'Jane Smith', 34, 60000.00, 2, '2019-07-23'),
+(3, 'Bob Brown', 45, 80000.00, 1, '2018-02-12'),
+(4, 'Alice Blue', 25, 45000.00, 3, '2021-03-22'),
+(5, 'Charlie P.', 29, 50000.00, 2, '2019-12-01'),
+(6, 'David Green', 38, 70000.00, 4, '2022-05-18'),
+(7, 'Eve Black', 40, 55000.00, 3, '2021-08-30');
+ 
+ SELECT e.emp_id,e.name AS Department
+ FROM Employee e
+ join Department d
+ on e.department_id=d.department_id
+ where d.name='IT';
+
+
+SELECT name FROM Employee
+WHERE name like'j%'
+
+
+SELECT name FROM Employee
+WHERE name like '%e'  
+
+  SLECT name FROM Employee
+  WHERE name like '%a%'
+
+  SELECT name FROM Employee
+WHERE LENGTH(name)=9;
+
+SELECT name FROM Employee
+WHERE   hire_date <'2023-01-01';
+
+SELECT name FROM Employee
+WHERE hire_date ='2020';
+
+SELECT name FROM Employee
+where hire_date =1;
+
+
+SELECT name FROM Employee
+where hire_date<'2019-01-01'
+
+  SELECT name FROM Employee
+WHERE hire_date>'2023-01-01';
+
+SELECT sum(salary) as total_sum
+from Employee;
+
+SELECT avg(salary) as average_salary
+FROM Employee;
+
+SELECT MIN(salary)  as minimum_salary
+    FROM Employee
+
+  SELECT e.name,count(e.emp_id),d.name as Department
+FROM Employee e
+JOIN Department d
+on e.department_id=d.department_id
+GROUP BY d.name;
+
+SELECT e.name,e.emp_id,d.name,avg(e.salary) as Department
+FROM Employee e
+JOIN Department d
+on e.department_id=d.department_id
+GROUP BY d.name;
+
+
+SELECT name FROM Employee
+where name like '_o%';
