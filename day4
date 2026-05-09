@@ -1,0 +1,99 @@
+49-select name
+from Department
+where department_id=(
+  select department_id
+  from Employee
+  group by department_id
+  order by count(*) desc
+  limit 1);
+50-select e.name,e.salary,e.department_id
+from Employee e
+where e.salary>(
+  select avg(e2.salary)
+  from Employee e2
+  where e2.department_id=e.department_id);
+51-select max(e.salary)
+from Employee e
+where (e.salary)<
+(
+  select max(e2.salary)
+from Employee e2
+where (e2.salary)<
+  (
+     select max(e3.salary) as high_salary
+from Employee e3) 
+
+  );
+53-select e.name,max(e.age)
+from Employee e
+join Department d on e.department_id=d.department_id
+where e.department_id=2
+group by e.name
+having max(e.age)>(
+  select avg(e2.age)
+  from Employee e2
+  where e2.department_id=(
+    select d.department_id
+    from Department d
+    where d.department_id=2)
+  );
+54-select name from Employee
+where department_id in(
+  select department_id from Project
+  where project_id>2);
+  55-select e.name
+from Employee e
+where e.hire_date=(
+  select e2.hire_date
+  from Employee e2
+  where name like 'jane smith');
+56-select sum(salary)
+from Employee
+where year(hire_date)='2020'
+  57-select avg(salary),department_id
+from Employee
+group by department_id
+order by avg(salary) desc
+  58-select d.name,e.department_id
+from Department d
+join Employee e on d.department_id=e.department_id
+where emp_id>1
+group by d.department_id
+having avg(e.salary)>55000
+59-select name
+from Employee 
+where year(hire_date) between  '2019' and '2021' 
+order by hire_date
+    60-select count(emp_id) as counts ,avg(salary) as avg_salary,department_id
+
+from Employee
+where emp_id>2
+group by department_id;
+61-select e.name,(e.salary),e.department_id
+from Employee e
+where salary>(
+  select avg(e2.salary)
+  from Employee e2
+  where e.department_id=e2.department_id);
+62-  select e.name,e.hire_date
+from Employee e
+where e.hire_date and e.hire_date
+order by e.hire_date
+limit 1;
+63-select d.name,count(p.project_id) as total_projects
+from Department d
+join Project p on d.department_id = p.department_id
+group by d.department_id,d.name
+order by total_projects
+  64-select name,max(salary),department_id from Employee
+group by department_id,name
+having max(salary)>(
+  select avg(salary)
+  from Employee e2
+  where Employee.department_id=e2.department_id);
+65-select name,salary
+from Employee
+where salary>(
+  select avg(salary)
+  from Employee e2
+  where Employee.department_id=e2.department_id);
