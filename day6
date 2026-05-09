@@ -1,0 +1,66 @@
+select queries---
+1-select * from Employees;
+2-select emp_name,salary from Employees;
+3-select emp_name,department from Employees;
+4-select emp_name from Employees where department='IT';
+5-select emp_name,experience from Employees;
+where Queries
+1-select emp_name from Employees where salary>70000
+2-select emp_name from Employees where city = 'Hyderabad';
+3-select emp_name from Employees where experience<4;
+4-select emp_name from Employees where department='Finance';
+5-select emp_name from Employees where salary=52000;
+Group by Queries
+1-select sum(salary), department from Employees group by department;
+2-select avg(salary),department from Employees group by department;
+3-select count(emp_id),city from Employees group by city;
+4-select max(salary),department from Employees group by department;
+5-select min(salary),department from Employees group by department;
+Having Queries
+1-select count(emp_id),department from Employees group by department having count(emp_id)>3;
+2-select avg(salary),department from Employees group by department having avg(salary)>60000;
+3-select count(emp_id),city from Employees group by city having count(emp_id)>2;
+4-select sum(salary),department from Employees group by department having sum(salary)>200000;
+5-select max(salary),department from Employees group by department having max(salary)>90000;
+top Queries
+1-select emp_name,   max(salary) from Employees group by emp_name order by max(salary) desc limit 5;
+2-select emp_name,   max(experience) from Employees group by emp_name order by max(experience) desc limit 3;
+3-select emp_name,department,max(salary) from Employees where department='Finance' group by department,emp_name order by max(salary) desc limit 2;
+4-select emp_name,city,max(salary) from Employees where city='Hyderabad' group by city,emp_name order by max(salary) desc limit 4;
+5-select emp_name,max(salary) from Employees  group by emp_name order by max(salary) desc limit 1;
+Distinct Queries
+1-select distinct(department) as department_name from Employees
+2-select distinct(city) as city_name from Employees
+3-select distinct(salary) as salary_values from Employees
+4-select distinct(city,department) as city_deaprtment_name from Employees
+5-select distinct(experience) as experience_values from Employees
+  Comparision operators Queries
+1-select emp_name,salary from Employees where salary>=80000
+2-select emp_name,experience from Employees where experience<=3
+3-select emp_name,salary from Employees where salary<>45000
+4-select emp_name,salary from Employees where salary<50000
+5-select emp_name,experience from Employees where experience>5
+  logical operators Queries
+1-select emp_name from Employees where department ='IT' and salary>70000
+2-select emp_name from Employees where city ='Hyderabad' OR city='Bangalore';
+3-select emp_name from Employees where department ='HR' and experience<3
+4-select emp_name from Employees where salary >60000 or experience>6
+5-select emp_name from Employees where department <>'Sales' 
+  Between Queries
+1-select emp_name from Employees where salary between 50000 and 80000
+2-select emp_name from Employees where experience between 3 and 6
+3-select emp_name from Employees where emp_id between 105 and 112
+4-select emp_name from Employees where salary not between 40000 and 60000
+5-select emp_name from Employees where experience between 2 and 4
+  IN and NOT IN Queries
+1-select emp_name from Employees where city in  ('Hyderabad', 'Mumbai')
+2-select emp_name from Employees where department in  ('IT', 'Finance')
+3-select emp_name from Employees where city not in  ('Chennai', 'Pune')
+4-select emp_name from Employees where salary in   (45000, 75000, 91000)
+ 5-select emp_name from Employees where department not in  ('HR', 'Sales')
+  Like Operators Queries
+1-select emp_name from Employees where emp_name like'R%'
+2-select emp_name from Employees where emp_name like'%a'
+3-select emp_name from Employees where emp_name like'%v%'
+4-select city from Employees where city like'B%'
+5-select department from Employees where department like'%s'
