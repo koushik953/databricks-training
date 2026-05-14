@@ -1,0 +1,115 @@
+1-select student_name,department_name
+from Student s
+join  Department d on s.department_id = d.department_id
+  2-select staff_name,department_name
+from Staff s
+full outer join Department d on s.department_id = d.department_id
+    3-select department_name
+from Department d
+join Student s on s.department_id = d.department_id
+where s.student_id is null
+    4-select student_name
+from Student s
+full outer join Mark m on s.student_id = m.student_id
+where m.marks is null
+    5-select subject_name
+from Subject s
+full outer join Staff f on s.staff_id = f.staff_id
+where f.staff_id  is null
+    6-select round(avg(s.cgpa),2),d.department_name
+from Student s
+full outer join Department d on s.department_id = d.department_id
+group by d.department_name
+    7-select d.department_name
+from Department d
+full outer join Student s on d.department_id = s.department_id
+group by d.department_id
+having avg(cgpa)>8.0
+    8-select count(s.student_id),d.department_name
+from Student s
+join Department d on s.department_id = d.department_id
+group by d.department_name
+9-select min(m.marks),max(m.marks),s.subject_name
+from Mark m
+full outer join Subject s on s.subject_id = m.subject_id
+group by s.subject_name
+10-select s.student_name
+from Student s
+join Mark m on s.student_id = m.student_id
+group by s.student_id,m.marks
+having m.marks >90
+  11-select s.student_name
+from Student s
+join Department d on s.department_id = d.department_id
+where d.department_name ='Computer Science'
+  12-select count(s.subject_id),f.staff_name
+from Subject s
+full outer join Staff f on s.staff_id = f.staff_id
+ group by f.staff_id
+  13-select s.student_name,sum(m.marks)
+from Student s
+full outer join Mark m on s.student_id = m.student_id
+group by s.student_name
+    14-select d.department_name,count(s.staff_id)
+from Department d
+full outer join Staff s on d.department_id = s.department_id
+group by d.department_name
+having count(s.staff_id)>2
+      15-select s.student_name,max(s.cgpa) 
+from Student s
+group by s.student_name
+having max(s.cgpa)>(
+  select avg(s1.cgpa)
+  from Student s1
+  );
+16-select s.staff_name,max(s.salary),d.department_name
+from Staff s
+full outer join Department d on s.department_id=d.department_id
+group by s.staff_name,d.department_name
+having max(s.salary)>(
+  select avg(s1.salary)
+  from Staff s1,staff s
+  where s.department_id=s1.department_id);
+17-SELECT staff_name, salary
+FROM Staff
+WHERE salary = (
+    SELECT salary
+    FROM Staff
+   WHERE salary IS NOT NULL
+    ORDER BY salary DESC
+    LIMIT 1 OFFSET 1
+);
+18-select s.student_name,max(m.marks),f.subject_name
+from Student s
+full outer join Mark m on s.student_id = m.student_id
+full outer join Subject f on m.subject_id = f.subject_id
+group by s.student_name,f.subject_name
+  19-select s.student_name,m.marks
+from Student s
+full outer join Mark m on s.student_id = m.student_id
+    20-select s.subject_name,avg(m.marks)
+from Subject s
+full outer join Mark m on s.subject_id = m.subject_id
+group by s.subject_name
+having avg(m.marks)<70
+      21-select student_name,cgpa
+from Student
+where cgpa is not null
+order by cgpa desc
+        22-select sum(s.salary),d.department_name
+from Staff s
+full outer join Department d on s.department_id = d.department_id
+group by d.department_name
+        23-select sum(s.salary),d.department_name
+from Staff s
+full outer join Department d on s.department_id = d.department_id
+group by d.department_name
+having sum(s.salary)>200000
+        24-select student_name
+from Student
+where  admission_year>'2021' and cgpa >7.5
+        25-select count(student_id),admission_year 
+
+from Student
+group by  admission_year
+        
