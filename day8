@@ -1,0 +1,69 @@
+27-select count(s.staff_id),d.department_name
+from Staff s 
+full outer join Department d on
+s.department_id = d.department_id
+group by d.department_name
+  28-select s.student_name
+from Student s
+full outer join Mark m on s.student_id = m.student_id
+where marks<50
+  29-select s.staff_name
+from Staff s
+where year(hire_date)<'2018'
+  30-select d.department_name,s.staff_name
+from Department d
+full outer join Staff s on d.department_id = s.department_id
+where s.salary is  null
+    31-select *,
+row_number() over (order by cgpa desc) as row_number1
+from Student
+  33-select *,
+dense_rank() over (order by salary desc) as dense_rank1
+from Staff
+  32-select *,
+rank() over (order by cgpa desc) as rank1
+from Student
+  34-select student_name,cgpa,
+count(cgpa) over (partition by student_id order by cgpa)
+
+from Student
+where cgpa is not null
+limit 3;
+35-select s.student_name,
+sum(m.marks)
+from Student s
+ join Mark m on s.student_id = m.student_id
+group by s.student_name
+  36-select s.student_name,
+round(avg(m.marks) over (partition by s.student_id),2) as avg_marks
+from Student s
+ join Mark m on s.student_id = m.student_id
+  37-select s.student_name,m.marks,
+lag(m.marks) over (partition by exam_type) as lag_marks
+from Student s
+ join Mark m on s.student_id = m.student_id
+  38-select s.student_name,m.marks,
+lead(m.marks) over (partition by exam_type) as lead_marks
+from Student s
+ join Mark m on s.student_id = m.student_id
+  39-select m.marks,s.subject_name,m.exam_type,
+max(m.marks) over () as max_marks
+from Mark m
+full outer join Subject s on m.subject_id = s.subject_id
+  40-select exam_type,avg(marks),
+round(avg(marks) over (order by exam_type),2) as cum_avg
+from Mark
+group by exam_type,marks
+  44-select cgpa,
+percent_rank() over (partition by student_id order by student_id) as per_cgpa
+from student
+  45-select 
+cume_dist() over (  order by salary) 
+from staff
+  46-select s.subject_name,
+       max(m.marks) as max_marks
+from Subject s
+join Mark m on m.subject_id = s.subject_id
+group by s.subject_name
+having max(m.marks) > (select avg(m2.marks) from Mark m2)
+         
