@@ -1,0 +1,78 @@
+emp_df.withColumn(
+    "age_group",
+    when(col("age") <= 18, "0-18")
+    .when(col("age") <= 30, "19-30")
+    .when(col("age") <= 50, "31-50")
+    .otherwise("Unknown")
+).show()
+
+emp_df.withColumn("yearly_salary",col("salary")*12).show()
+
+emp_df.withColumnRenamed("emp_id","employee_id")\
+      .withColumnRenamed("city","work_location")\
+      .withColumnRenamed("joining_date","doj")\
+      .withColumnRenamed("designation","role")\
+      .withColumnRenamed("salary","monthly_salary")\
+      .show()    
+
+
+emp_df.drop("age").show()
+
+emp_df.drop("gender").show()
+
+emp_df.drop("joining_date").show()
+
+emp_df.drop("age","city").show()
+
+emp_df.drop("designation").show()
+
+emp_df.select("department").distinct().show()
+
+emp_df.select("city").distinct().show()
+
+emp_df.select("designation").distinct().show()
+
+emp_df.select("gender").distinct().show()
+
+emp_df.select("city","department").distinct().show()
+
+emp_df.dropDuplicates(["emp_id"]).show()
+
+emp_df.dropDuplicates(["city"]).show()
+
+emp_df.dropDuplicates(["department"]).show()
+
+emp_df.dropDuplicates(["name"]).show()
+
+emp_df.dropDuplicates(["department","city"]).show()
+
+emp_df.orderBy("salary").show()
+
+emp_df.orderBy("city" ) .show()
+
+emp_df.orderBy(desc("age")).show()
+
+emp_df.orderBy(desc("joining_date")).show()
+
+emp_df.sort("department","salary").show()
+
+emp_df.groupBy("department").avg("salary").show()
+
+emp_df.groupBy("department").max("salary").show()
+
+emp_df.groupBy("department").min("age").show()
+
+emp_df.groupBy("city").count().show()
+
+emp_df.groupBy("gender").sum("salary").show()
+
+emp_df.agg(sum("salary")).show()
+
+emp_df.agg(avg("age")).show()
+
+emp_df.agg(min("salary"),max("salary")).show()
+
+emp_df.agg(count("emp_id")).show()
+
+emp_df.groupBy("department").agg(avg("salary"),avg("age")).show()
+
